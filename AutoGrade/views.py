@@ -11,7 +11,7 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.http import urlsafe_base64_decode
 from django.template.loader import render_to_string
 from .tokens import account_activation_token
-from django.utils.encoding import force_text
+from django.utils.encoding import force_bytes
 from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
 from django.utils import timezone
@@ -21,7 +21,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from .models import Student, Course, Assignment, Submission, AssignmentExtension, OtherFile
 from .forms import SignUpForm, EnrollForm, ChangeEmailForm
@@ -133,7 +133,7 @@ def signup(request):
 
 def activate(request, uidb64, token):
     try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
+        uid = force_bytes(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
     except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None

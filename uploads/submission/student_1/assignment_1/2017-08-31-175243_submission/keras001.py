@@ -1,5 +1,5 @@
-from keras.models import Sequential
-from keras.layers import Dense, Activation
+from keras import Sequential
+from keras.api.layers import Dense, Activation
 
 model = Sequential([
     Dense(32, input_dim=784),

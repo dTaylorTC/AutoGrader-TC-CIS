@@ -15,11 +15,11 @@ Including another URLconf
 """
 
 from django.views.generic.base import RedirectView
-from django.conf.urls import url,include
+from django.urls import path, re_path, include
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^$', RedirectView.as_view(url='autograde/', permanent=False), name='index'),
-    url(r'^autograde/', include('AutoGrade.urls')),
-    url(r'^admin/', admin.site.urls),
+    re_path(r'^$', RedirectView.as_view(url='autograde/', permanent=False), name='index'),
+    path('autograde/', include('AutoGrade.urls')),
+    path('admin/', admin.site.urls),
 ]

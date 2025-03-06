@@ -1,30 +1,14 @@
 import requests
 import json
 import sys
-import requests
 import zipfile
 import os
 import logging
-import json
-import zipfile
-import shutil
-import logging
-import os
-import sys
 import re
 import time
 from datetime import datetime
 
-# Using input() in python 2 or 3
-try:
-    # set raw_input as input in python2
-    input = raw_input
-except:
-    pass
-
-# logging.basicConfig(filename='submission.log')
 logging.basicConfig(level=logging.DEBUG)
-
 
 url = "##RUN_API_URL##"
 
@@ -33,7 +17,6 @@ def touch(fname, times=None):
         os.utime(fname, times)
 
 def get_score_from_result_line(res_line, total_points):
-    # case where we have failures and passes
     match = re.match(r"=*\s(\d*)\sfailed,\s(\d*)\spassed,?\s.*", res_line)
     passed = 0
     failed = 0
@@ -52,7 +35,6 @@ def get_score_from_result_line(res_line, total_points):
                 failed = int(match.group(1))
             else:
                 logging.error("Failed to parse score line: " + res_line)
-                # TODO: throw exception
                 return (0,0)
 
     return (passed, failed)
@@ -71,7 +53,7 @@ def run_student_tests(target_folder, total_points, timeout):
     logging.debug("Capturing stdout")
 
     try:
-        from cStringIO import StringIO
+        import cStringIO as StringIO
     except ImportError:
         from io import StringIO
 
@@ -122,13 +104,11 @@ class Submission():
         self.config['email'] = cred['email']
         self.config['submission_pass'] = cred['submission_pass']
 
-        # Save File
         with open(self.config_file_name, 'w') as file:
             json.dump(self.config, file)
 
-
     def get_cred(self):
-        if 'email' in self.config and 'submission_pass' in self.config :
+        if 'email' in self.config and 'submission_pass' in self.config:
             logging.info('Using credentials of config file')
             cred = {
                 "email": self.config['email'],
@@ -153,7 +133,7 @@ class Submission():
             logging.info('No submission file found')
             pass
 
-        modifiable_files     = self.config['modifiable_files']
+        modifiable_files = self.config['modifiable_files']
         for mf in modifiable_files:
             if not os.path.exists(mf):
                 logging.error("Required assignment file not found: ", mf)
@@ -176,8 +156,8 @@ class Submission():
 
         try:
             r = requests.post(url + 'submit_assignment',
-                files = {'submission_file': open(submission_file, 'rb')},
-                data = data)
+                files={'submission_file': open(submission_file, 'rb')},
+                data=data)
         except requests.exceptions.RequestException as e:
             logging.error("ERROR: {}".format(e))
             sys.exit(1)
@@ -196,8 +176,8 @@ class Submission():
         elif r.status_code == 403:
             logging.error('Login failed, Removing credentials from config file')
             try:
-                del self.config['email'];
-                del self.config['submission_pass'];
+                del self.config['email']
+                del self.config['submission_pass']
             except Exception:
                 pass
 
@@ -205,25 +185,24 @@ class Submission():
                 json.dump(self.config, file)
 
             result = r.json()
-            
-            logging.error("="*80)      
-            logging.error("RESPONSE: " + result['message'])      
+
+            logging.error("="*80)
+            logging.error("RESPONSE: " + result['message'])
             logging.error("="*80)
             sys.exit(1)
         elif r.status_code == 400 or r.status_code == 404:
             self.save_cred(cred)
             result = r.json()
-            
+
             logging.error("="*80)
-            logging.error("RESPONSE: " + result['message'])      
+            logging.error("RESPONSE: " + result['message'])
             logging.error("="*80)
             sys.exit(1)
         else:
-            logging.error("="*80)      
-            logging.error("ERROR: Invalid request, status_code: " + str(r.status_code))      
+            logging.error("="*80)
+            logging.error("ERROR: Invalid request, status_code: " + str(r.status_code))
             logging.error("="*80)
             sys.exit(1)
-
 
     def run(self):
         if len(sys.argv) == 1:
@@ -246,7 +225,6 @@ class Submission():
             logging.error("="*80)
             logging.error("ERROR: Invalid argument supplied")
             logging.error("="*80)
-
 
 s = Submission()
 s.run()

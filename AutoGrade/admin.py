@@ -4,9 +4,8 @@ from django.db.models import Max, Count
 from django.contrib.auth.models import User
 from django import forms
 from .models import *
-from django.contrib import admin
 from django.utils.html import format_html
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 class UserInline(admin.StackedInline):
     model = User
@@ -83,10 +82,10 @@ class StudentModelAdmin(admin.ModelAdmin):
     student_loginas.allow_tags = True
 
     def get_queryset(self, request):
-        qs = super(StudentModelAdmin, self).get_queryset(request).distinct() 
+        qs = super(StudentModelAdmin, self).get_queryset(request).distinct()
         if request.user.is_superuser:
             return qs
-        return qs.filter(courses__instructor__user=request.user).distinct() 
+        return qs.filter(courses__instructor__user=request.user).distinct()
 
     list_display = ('student_username', 'student_firstname', 'student_lastname', 'student_email', 'student_loginas')
     search_fields = ['user__email', 'user__first_name', 'user__last_name', 'user__username']
@@ -137,8 +136,6 @@ class OtherFileAdmin(admin.ModelAdmin):
         return {}
 
 admin.site.register(OtherFile, OtherFileAdmin)
-
-
 
 @admin.register(Assignment)
 class AssignmentModelAdmin(admin.ModelAdmin):
