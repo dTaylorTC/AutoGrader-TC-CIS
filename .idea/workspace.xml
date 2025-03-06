@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7e00248-fecd-4741-9c77-279a45cdb004" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutoGr/settings-sample.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutoGr/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/AutoGr/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AutoGrade/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/AutoGrade/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AutoGrade/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/AutoGrade/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AutoGrade/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/AutoGrade/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AutoGrade/reports.py" beforeDir="false" afterPath="$PROJECT_DIR$/AutoGrade/reports.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AutoGrade/tokens.py" beforeDir="false" afterPath="$PROJECT_DIR$/AutoGrade/tokens.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutoGrade/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/AutoGrade/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutoGrade/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/AutoGrade/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/assignment/course_1/add-two-numbers/keras001.py" beforeDir="false" afterPath="$PROJECT_DIR$/uploads/assignment/course_1/add-two-numbers/keras001.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/assignment/course_1/testing/NetworkDiscovery.py" beforeDir="false" afterPath="$PROJECT_DIR$/uploads/assignment/course_1/testing/NetworkDiscovery.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/uploads/assignment/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/uploads/assignment/run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/submission/student_1/assignment_1/2017-08-31-175243_submission/keras001.py" beforeDir="false" afterPath="$PROJECT_DIR$/uploads/submission/student_1/assignment_1/2017-08-31-175243_submission/keras001.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +36,7 @@
     <setting file="file://$PROJECT_DIR$/venv/Lib/site-packages/material/frontend/urlconf.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
@@ -46,32 +46,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Notification.DisplayName-DoNotAsk-Database detector&quot;: &quot;Database detector&quot;,
-    &quot;Notification.DoNotAsk-Database detector&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.pycharm.django.structure.promotion.once.per.project&quot;: &quot;true&quot;,
-    &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR_AND_PREVIEW&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/taylord/Documents/GitHub/AutoGrader-TC-CIS/AutoGr/settings.py&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.github.copilot.settings.ApplicationConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Django Server.AutoGrader-TC-CIS.executor": "Debug",
+    "Notification.DisplayName-DoNotAsk-Database detector": "Database detector",
+    "Notification.DoNotAsk-Database detector": "true",
+    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.pycharm.django.structure.promotion.once.per.project": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/taylord/Documents/GitHub/AutoGrader-TC-CIS/AutoGr/settings.py",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "com.github.copilot.settings.ApplicationConfigurable",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;sqlite&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="AutoGrader-TC-CIS" type="Python.DjangoServer" factoryName="Django server">
       <module name="AutoGrader-TC-CIS" />
@@ -80,6 +82,7 @@
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="AutoGr.settings" />
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
@@ -122,7 +125,7 @@
       <workItem from="1741297877770" duration="133000" />
       <workItem from="1741298036636" duration="2194000" />
       <workItem from="1741300300794" duration="224000" />
-      <workItem from="1741300569175" duration="1249000" />
+      <workItem from="1741300569175" duration="3032000" />
     </task>
     <servers />
   </component>
@@ -139,15 +142,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/venv/Lib/site-packages/django/core/checks/registry.py</url>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

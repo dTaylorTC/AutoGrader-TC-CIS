@@ -1,11 +1,10 @@
-from django.conf import settings
 from django.contrib import admin
-from django.db.models import Max, Count
-from django.contrib.auth.models import User
-from django import forms
-from .models import *
-from django.utils.html import format_html
+from django.db.models import Count
 from django.urls import reverse
+from django import forms  # Added import for forms
+
+from .models import *
+
 
 class UserInline(admin.StackedInline):
     model = User

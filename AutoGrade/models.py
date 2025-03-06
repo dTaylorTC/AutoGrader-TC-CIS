@@ -1,26 +1,27 @@
 from __future__ import unicode_literals
 
-from django.db import models
-from django.contrib.auth.models import User
-from django.db.models import Sum
-from django.db.models.signals import post_save, pre_save
-from django.dispatch import receiver
-from django.conf import settings
-
-from .storage import OverwriteStorage
-
-from os.path import basename
-from datetime import datetime, timedelta
-import string
+import json
+import logging
+import os
 import random
+import string
 import time
 import zipfile
-import json
-import os
+from datetime import datetime, timedelta
+from os.path import basename
 from shutil import copyfile
+
 import mosspy
-import logging
+from django.conf import settings
+from django.contrib.auth.models import User
+from django.db import models
+from django.db.models import Sum
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 from .grader import touch
+from .storage import OverwriteStorage
+
 
 def other_files_directory_path(instance, filename):
     return 'uploads/assignment/course_{0}/{1}/{2}'.format(instance.assignment.course.id, instance.assignment.title.replace(" ","-").lower(), filename)

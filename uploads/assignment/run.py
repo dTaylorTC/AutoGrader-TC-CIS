@@ -1,12 +1,12 @@
-import requests
 import json
+import logging
+import os
+import re
 import sys
 import zipfile
-import os
-import logging
-import re
-import time
-from datetime import datetime
+
+import requests
+from io import StringIO
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -35,7 +35,7 @@ def get_score_from_result_line(res_line, total_points):
                 failed = int(match.group(1))
             else:
                 logging.error("Failed to parse score line: " + res_line)
-                return (0,0)
+                return (0, 0)
 
     return (passed, failed)
 
@@ -48,14 +48,9 @@ def run_student_tests(target_folder, total_points, timeout):
 
     logging.debug("Changing directory ... ")
     os.chdir(target_folder)
-    score = (0, 0) # passed, failed
+    score = (0, 0)  # passed, failed
 
     logging.debug("Capturing stdout")
-
-    try:
-        import cStringIO as StringIO
-    except ImportError:
-        from io import StringIO
 
     old_stdout = sys.stdout
     sys.stdout = mystdout = StringIO()
@@ -97,7 +92,7 @@ class Submission():
                 self.config = json.load(file)
         except Exception:
             logging.error("No config file found")
-            sys.exit()
+            raise FileNotFoundError("No config file found")
 
     def save_cred(self, cred):
         logging.info('Saving credentials to config file')
@@ -136,8 +131,8 @@ class Submission():
         modifiable_files = self.config['modifiable_files']
         for mf in modifiable_files:
             if not os.path.exists(mf):
-                logging.error("Required assignment file not found: ", mf)
-                sys.exit("ERROR: needed file not found")
+                logging.error("Required assignment file not found: " + mf)
+                raise FileNotFoundError("ERROR: needed file not found")
 
         zip_file = zipfile.ZipFile(submission_file, 'w', zipfile.ZIP_DEFLATED)
         files = modifiable_files
@@ -156,11 +151,12 @@ class Submission():
 
         try:
             r = requests.post(url + 'submit_assignment',
-                files={'submission_file': open(submission_file, 'rb')},
-                data=data)
+                              files={'submission_file': open(submission_file, 'rb')},
+                              data=data)
         except requests.exceptions.RequestException as e:
             logging.error("ERROR: {}".format(e))
-            sys.exit(1)
+            raise
+
         finally:
             try:
                 logging.info('Deleting submission file')
@@ -186,45 +182,45 @@ class Submission():
 
             result = r.json()
 
-            logging.error("="*80)
+            logging.error("=" * 80)
             logging.error("RESPONSE: " + result['message'])
-            logging.error("="*80)
-            sys.exit(1)
+            logging.error("=" * 80)
+            raise PermissionError("Login failed")
         elif r.status_code == 400 or r.status_code == 404:
             self.save_cred(cred)
             result = r.json()
 
-            logging.error("="*80)
+            logging.error("=" * 80)
             logging.error("RESPONSE: " + result['message'])
-            logging.error("="*80)
-            sys.exit(1)
+            logging.error("=" * 80)
+            raise ValueError("Invalid request")
         else:
-            logging.error("="*80)
+            logging.error("=" * 80)
             logging.error("ERROR: Invalid request, status_code: " + str(r.status_code))
-            logging.error("="*80)
-            sys.exit(1)
+            logging.error("=" * 80)
+            raise ValueError("Invalid request")
 
     def run(self):
         if len(sys.argv) == 1:
-            sys.exit("ERROR: No argument supplied")
+            raise ValueError("ERROR: No argument supplied")
         elif sys.argv[1] == "remote":
             r = self.submit_assignment()
             result = r.json()
             score = result['message']
-            logging.info("="*80)
+            logging.info("=" * 80)
             logging.info("RESPONSE: " + " passed: " + str(score[0]) + " failed: " + str(score[1]) + " score: " + str(score[2]))
             logging.info("NOTE: You can see your submission on web interface also.")
-            logging.info("="*80)
+            logging.info("=" * 80)
         elif sys.argv[1] == "local":
             (result, out) = run_student_tests(os.getcwd(), self.config['total_points'], self.config['timeout'])
-            logging.info("="*80)
+            logging.info("=" * 80)
             logging.info("RESULT: " + " passed: " + str(result[0]) + " failed: " + str(result[1]))
-            logging.info("="*80)
+            logging.info("=" * 80)
             write_student_log(os.getcwd(), out)
         else:
-            logging.error("="*80)
+            logging.error("=" * 80)
             logging.error("ERROR: Invalid argument supplied")
-            logging.error("="*80)
+            logging.error("=" * 80)
 
 s = Submission()
 s.run()

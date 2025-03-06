@@ -1,7 +1,5 @@
-import statistics
 from .models import *
-import dateutil.relativedelta
-from datetime import timedelta
+
 
 def get_course_student_stat(course):
     assignments = Assignment.objects.filter(course=course)
@@ -32,7 +30,7 @@ def get_course_student_stat(course):
         if completed_assignments:
             average_marks = total_marks_in_assignments/completed_assignments
             average_submissions = student_submission_count/float(completed_assignments)
-            average_time_taken = total_time_taken/(completed_assignments)
+            average_time_taken = total_time_taken / completed_assignments
             average_time_taken -= timedelta(microseconds=average_time_taken.microseconds)
 
         course_student_data.append([student, completed_assignments, late_days_remaining, average_marks, average_submissions, average_time_taken])
